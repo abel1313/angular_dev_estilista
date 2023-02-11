@@ -1,1 +1,38 @@
-<p>reservar-pedido works!</p>
+<div class="row">
+    <div class="col-12">
+        <form>
+            <div class="card">
+                <div class="card-header">
+                    <legend class="border">
+                        <div class="card-text text-center">
+                            <h3>
+                                RESERVAR PEDIDO
+                            </h3>
+                        </div>
+                    </legend>
+                </div>
+                
+                <div class="card-body">
+
+                    <div class="form-group">
+                        <label for="hora">Hora</label>
+                        <input type="text" class="form-control col-12" id="hora" formControlName="horaSeleccionada"
+                        maxlength="2">
+                        <div *ngIf="formReservar.get('horaSeleccionada')?.invalid && (formReservar.get('horaSeleccionada')?.dirty || formReservar.get('horaSeleccionada')?.touched)"
+                        class="alert alert-danger">
+        
+                        <div *ngIf="formReservar.get('horaSeleccionada')?.errors?.['required']">
+                            La hora es requerida.
+                        </div>
+                          </div>
+                    </div>
+
+                </div>
+
+                <div class="card-footer">
+
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

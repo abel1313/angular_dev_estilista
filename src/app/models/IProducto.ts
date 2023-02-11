@@ -1,3 +1,4 @@
+import { IEstatus } from 'src/app/models';
 import { Estatus } from './IEstatus';
 import { Super } from './ISuper.mode';
 import { TamanioProducto } from './ITamanioProducto';
@@ -9,6 +10,7 @@ export interface IProducto extends ISuper{
 
     nombreProducto: string;
     tipoPieza: ITamanioProducto;
+    estatusPieza: IEstatus;
 
 }
 
