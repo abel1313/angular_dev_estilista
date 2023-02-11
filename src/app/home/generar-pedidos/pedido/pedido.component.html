@@ -1,0 +1,145 @@
+<div class="row mt-2">
+    <div class="col-12">
+        <div class="card">
+            <form [formGroup]="formPedido" (ngSubmit)="guardarPedido()"  >
+                <div class="card-header">
+                    <h3 class="text-center">
+                        Generar pedido
+                    </h3>
+                </div>
+                <div class="card-body">
+
+                    
+
+                    <div class="row">
+                        <div class="col-12 ">
+                            <label for="auto-complete" class="d-flex justify-content-evenly">Cliente</label>
+                            
+                            <div class="col-9 mx-auto" id="auto-complete">
+                                    <ng-autocomplete         
+                                    aria-describedby="Combo"
+                                    [data]="data"
+                                    searchKeyword="name"
+                                    placeholder="Ingrese el nombre del cliente"
+                                    (selected)='selectEvent($event)'
+                                    [itemTemplate]="itemTemplate"
+                                    [notFoundTemplate]="notFoundTemplate"        
+                                    (input)="onInput($event)"
+                                    formControlName="cliente">                                 
+                                    </ng-autocomplete>
+                                    
+                                    <ng-template #itemTemplate let-item>
+                                    <a [innerHTML]="item.name"></a>
+                                    </ng-template>
+                                    
+                                    <ng-template #notFoundTemplate let-notFound>
+                                    <div [innerHTML]="notFound"></div>
+                                    </ng-template>
+
+                                    <div *ngIf="formPedido.get('cliente')?.invalid && (formPedido.get('cliente')?.dirty || formPedido.get('cliente')?.touched)"
+                                    class="alert alert-danger">
+                    
+                                    <div *ngIf="formPedido.get('cliente')?.errors?.['required']">
+                                        El nombre de cliente es requerido.
+                                    </div>
+                                    
+                                      </div>
+                                <div *ngIf="formPedido?.invalid && (formPedido?.dirty || formPedido?.touched)">
+                
+                                <div *ngIf="this.formPedido.errors?.['clienteNoExiste']" class="alert alert-danger">
+                                    El cliente que busca no existe
+                                </div>
+                                
+                            </div>
+                              
+                                
+                                </div>
+
+
+                        
+                        </div>
+                    </div>
+
+                    <div class="row  mt-3">
+                        <div class="col-4 d-flex justify-content-center">                            
+                            <mat-form-field appearance="fill" class="back-color date-picker" id="fecha" >
+                                <mat-label>Ingrese la fecha</mat-label>
+                                <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" formControlName="fechaCliente"  >
+                                <mat-hint>MM/DD/YYYY</mat-hint>
+                                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                                <div *ngIf="formPedido.get('fechaCliente')?.invalid && (formPedido.get('fechaCliente')?.dirty || formPedido.get('fechaCliente')?.touched)"
+                                class="alert alert-danger">
+                
+                                <div *ngIf="formPedido.get('fechaCliente')?.errors?.['required']">
+                                    La fecha es requerida.
+                                </div>
+                                  </div>
+                              </mat-form-field>
+                        </div>
+
+                        <div class="col-8">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="hora">Hora</label>
+                                        <input type="text" class="form-control col-12" id="hora" formControlName="horaSeleccionada" #valueHora (keyup)="keyUpHora(valueHora.value)"
+                                        maxlength="2">
+                                        <div *ngIf="formPedido.get('horaSeleccionada')?.invalid && (formPedido.get('horaSeleccionada')?.dirty || formPedido.get('horaSeleccionada')?.touched)"
+                                        class="alert alert-danger">
+                        
+                                        <div *ngIf="formPedido.get('horaSeleccionada')?.errors?.['required']">
+                                            La hora es requerida.
+                                        </div>
+                                          </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    
+                                        <div class="form-group">
+                                            <label for="minutos">Minutos</label>
+                                            <input type="text" class="form-control" id="minutos" formControlName="minutoSeleccionado" #valueMinuto (keyup)="keyUpMinuto(valueMinuto.value)"
+                                            maxlength="2">
+                                            <div *ngIf="formPedido.get('minutoSeleccionado')?.invalid && (formPedido.get('minutoSeleccionado')?.dirty || formPedido.get('minutoSeleccionado')?.touched)"
+                                            class="alert alert-danger">
+                            
+                                            <div *ngIf="formPedido.get('minutoSeleccionado')?.errors?.['required']">
+                                                Los minutos son requeridos.
+                                            </div>
+                                              </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <h3>
+                                        Fecha: DD-MM-YYYY {{formPedido.get('fechaCliente')?.value | date:'dd-MM-YYYY'}} Hora: {{ fechaCompleta}} {{ horaCompleta | horaAMPM }}
+                                    </h3>
+                                </div>
+                            </div>
+                
+                        </div>
+
+                    </div>
+                </div>
+                <div class="card-footer">
+                    
+                    <div class="row">
+                        <div class="col-6 d-flex justify-content-center">
+                            <button class="btn btn-info col-6" (click)="cancelarOpcion($event)">
+                                Cancelar
+                            </button>
+                        </div>
+                        <div class="col-6 d-flex justify-content-center">
+                            <button class="btn btn-success col-6" [disabled]="formPedido.invalid">
+                                Guardar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

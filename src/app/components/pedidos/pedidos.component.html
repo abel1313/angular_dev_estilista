@@ -1,0 +1,37 @@
+<div class="row">
+    <div class="col-12">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="inputGroupSelect01">Options</label>
+            </div>
+            <select class="form-control text-center" id="inputGroupSelect01" >
+              <option *ngFor="let item of comboPedido"  [value]="item.index">{{item.nombre}}</option>
+            </select>
+          </div>
+    </div>
+</div>
+
+<div class="row">
+  <div class="col-12 d-flex justify-content-center">
+    <div class="ng-autocomplete">
+      <ng-autocomplete 
+        [data]="data"
+        [searchKeyword]="keyword"
+        placeholder="Select country"
+        (selected)='selectEvent($event)'
+        (inputChanged)='onChangeSearch($event)'
+        (inputFocused)='onFocused($event)'
+        [itemTemplate]="itemTemplate"
+        [notFoundTemplate]="notFoundTemplate">                                 
+      </ng-autocomplete>
+      
+      <ng-template #itemTemplate let-item>
+      <a [innerHTML]="item.name"></a>
+      </ng-template>
+      
+      <ng-template #notFoundTemplate let-notFound>
+      <div [innerHTML]="notFound"></div>
+      </ng-template>
+      </div>
+  </div>
+</div>

@@ -1,0 +1,8 @@
+
+<label [for]="id">{{myLabel}}</label>
+<div class="input-group mb-0">
+    <span class="input-group-text" [id]="id">{{ etiqueta }} </span>
+    <input type="text" [id]="id" class="form-control" [placeholder]="placeholder" [attr.aria-label]="arial"
+     [disabled]="isDisabled" (input)="onInput($event)"
+        [attr.aria-describedby]="arial">
+</div>

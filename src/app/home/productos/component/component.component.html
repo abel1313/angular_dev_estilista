@@ -1,0 +1,112 @@
+<div class="row">
+    <div class="col-12">
+        <form [formGroup]="formAddProducto" (ngSubmit)="guardarProducto()" >
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="text-center">
+                        {{ tituloComponente }}
+                    </h3>
+                </div>
+                <div class="card-body">
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="producto">Ingrese el nombre del producto</label>
+                                    <input type="text" id="producto" class="form-control" formControlName="nombreProducto" aria-describedby="Es el nombre del producto">
+                                    <div *ngIf="formAddProducto.get('nombreProducto')?.invalid && (formAddProducto.get('nombreProducto')?.dirty || formAddProducto.get('nombreProducto')?.touched)"
+                                    class="alert alert-danger">
+                                        <div *ngIf="formAddProducto.get('nombreProducto')?.errors?.['required']">
+                                            El nombre de producto es requerido.
+                                        </div>
+                                     </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12" formGroupName="tamanoProducto">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h3>
+                                                Piezas
+                                            </h3>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label for="tipoPiezaProd">Ingrese el tipo del pieza del producto</label>
+                                                <input type="text" id="tipoPiezaProd" class="form-control" formControlName="tipoPieza" aria-describedby="Es el tipo de pieza del producto">
+                                                <div *ngIf="formAddProducto.get('tamanoProducto.tipoPieza')?.invalid && (formAddProducto.get('tamanoProducto.tipoPieza')?.dirty || formAddProducto.get('tamanoProducto.tipoPieza')?.touched)"
+                                                class="alert alert-danger">
+                                                    <div *ngIf="formAddProducto.get('tamanoProducto.tipoPieza')?.errors?.['required']">
+                                                        El tipo de pieza del producto es requerido.
+                                                    </div>
+                                                 </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label for="tipoPiezaPrec">Ingrese el precio del pieza del producto</label>
+                                                <input type="text" id="tipoPiezaPrec" class="form-control" formControlName="precioPieza" aria-describedby="Es el precio por pieza de cada producto">
+                                                <div *ngIf="formAddProducto.get('tamanoProducto.precioPieza')?.invalid && (formAddProducto.get('tamanoProducto.precioPieza')?.dirty || formAddProducto.get('tamanoProducto.precioPieza')?.touched)"
+                                                class="alert alert-danger">
+                                                    <div *ngIf="formAddProducto.get('tamanoProducto.precioPieza')?.errors?.['required']">
+                                                        El precio de pieza del producto es requerido.
+                                                    </div>
+                                                    <div *ngIf="formAddProducto.get('tamanoProducto.precioPieza')?.errors?.['min']">
+                                                        El precio minimo de la pieza del producto es requerido.
+                                                    </div>
+                                                 </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                            </div>
+                        </div>
+
+                        
+                        <div class="row">
+                            <div class="col-12" formGroupName="estatusPieza">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h3>
+                                                Estatus
+                                            </h3>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <div class="form-check form-switch">
+                                                    <input id="estatusProducto" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked formControlName="activo" aria-describedby="Es estatus del producto">
+                                                    <label class="form-check-label" for="estatusProducto">Ingrese el estatus producto</label>
+                                                  </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+
+
+                </div>
+                <div class="card-footer">
+
+
+                    <div class="row">
+                      <div class="col-12">
+                        <button class="btn btn-success col-12" [disabled]="formAddProducto.invalid">
+                            {{ tituloBtn }}
+                        </button>
+                      </div>
+                </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

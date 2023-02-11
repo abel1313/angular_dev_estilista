@@ -1,0 +1,25 @@
+ 
+<label for="auto-complete">Cliente</label>
+<div class="ng-autocomplete" id="auto-complete">
+        <ng-autocomplete         
+        aria-describedby="Combo"
+        [data]="data"
+        [searchKeyword]="keyword"
+        [placeholder]="placeHolder"
+        (inputCleared)="clearInput($event)"
+        (selected)='selectEvent($event)'
+        [itemTemplate]="itemTemplate"
+        [notFoundTemplate]="notFoundTemplate"        
+        (input)="onInput($event)"
+        >                                 
+        </ng-autocomplete>
+        
+        <ng-template #itemTemplate let-item>
+        <a [innerHTML]="item.name"></a>
+        </ng-template>
+        
+        <ng-template #notFoundTemplate let-notFound>
+        <div [innerHTML]="notFound"></div>
+        </ng-template>
+    </div>
+

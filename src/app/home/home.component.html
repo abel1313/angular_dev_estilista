@@ -1,0 +1,46 @@
+<div class="row">
+    <div style="border:1px solid red" class="col-6 mx-auto">
+        <form [formGroup]="formCliente" (ngSubmit)="guardarCliente();">
+
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="card-title">
+                        Datos del cliente
+                    </h1>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-8 mx-auto">
+                            <app-inputs 
+                            [myLabel]="'Nombre cliente'" 
+                            [placeholder]="'Ingrese el nombre'" 
+                            [etiqueta]="'nombre'" 
+                            [id]="'name'" 
+                            [arial]="'Descripcion del nombre del cliente'" 
+                            formControlName="primer"></app-inputs>
+                            <div
+                                *ngIf="formCliente.get('primer')?.invalid && 
+                                (formCliente.get('primer')?.dirty || formCliente.get('primer')?.touched)">
+                                <span class="d-flex justify-content-center" 
+                                *ngIf="formCliente.get('primer')?.errors?.['required']">
+                                    *Campo requerido
+                                </span>
+
+                                <span class="d-flex justify-content-center" 
+                                *ngIf="formCliente.get('primer')?.errors?.['maxlength']">
+                                    *Longitud maxima es de 30
+                                </span>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-success" [disabled]="formCliente.invalid"> guardar</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+
+<div class="modal-res">
+    <div class="modal-con">
+        <app-pedidos (respuestaCombo)="combo($event)" ></app-pedidos>
+
+        <app-pedido *ngIf="completeAuto.id === 0"></app-pedido>
+        <app-reservar-pedido *ngIf="completeAuto.id === 2"></app-reservar-pedido>
+
+
+
+
+      </div>
+</div>

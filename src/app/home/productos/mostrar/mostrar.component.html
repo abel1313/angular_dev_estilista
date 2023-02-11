@@ -1,0 +1,54 @@
+<div class="row-grid">
+    <div class="item" *ngFor="let item of listaProductos" 
+    style="background-color: rgba(255,255,255 ,0.2); border-radius: 7px; box-shadow: 5px 5px 5px rgba(148, 175, 194  );">
+        <div class="item-grid" >
+           
+            <div>
+                <h5 class="text-center mt-2">
+                    Producto: {{ item.nombreProducto}}
+                </h5>
+            </div>
+            <div class="item-1" style="padding: 20px; ">
+                <p class="mb-1 text-center">
+                    <strong>
+                        Tipo de pieza: {{ item.tamanoProducto.tipoPieza }}
+                    </strong>
+                </p>
+                <p class="mb-1 text-center">
+                    <strong>
+                        Precio: {{ item.tamanoProducto.precioPieza }}
+                    </strong>
+                </p>
+
+
+            </div>
+            <div class="item-2">
+                <div class="button-grid">
+                    <button class="btn btn-default" (click)="agregarProducto(valueProducto.value, item);">
+                        <span>
+                            <i class="fas fa-plus"></i>
+                        </span>
+                    </button>
+                    <button class="btn btn-default" (click)="disminuirProducto(valueProducto.value, item);">
+                        <span>
+                            <i class="fas fa-trash"></i>
+                        </span>
+                    </button>
+                    <button class="btn btn-default" (click)="editarProducto(valueProducto.value, item);">
+                        <span>
+                            <i class="fas fa-edit"></i>
+                        </span>
+                    </button>
+                    <div>
+                        <input type="text" class="form-control" #valueProducto value="1" placeholder="Ingrese cantidad">
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+

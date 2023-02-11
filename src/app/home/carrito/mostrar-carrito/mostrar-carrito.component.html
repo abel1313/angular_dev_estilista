@@ -1,0 +1,75 @@
+
+<div class="row">
+  <div class="col-6">
+    <button class="btn btn-secondary col-12" (click)="dale()">
+      Encargar
+    </button>
+  </div>
+  <div class="col-6">
+    <button class="btn btn-secondary col-12" (click)="dale()">
+      Pagar
+    </button>
+  </div>
+</div>
+
+<div class="row" >
+    <div class="col-8">
+  
+        <!-- datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" -->
+      <table  class="table table-striped" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" >
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Precio</th>
+            <th>Cantidad</th>
+            <th>Accion</th>
+          </tr>
+        </thead>
+
+
+
+            <tbody *ngIf="carritoVenta !== null ">
+          <tr *ngFor="let item of carritoVenta ">
+            <td>{{ item.producto }}</td>
+            <td>{{ item.precio }} </td>
+            <td>{{ item.cantidad }} </td>
+            
+             <td>
+               
+            </td>
+          </tr>
+
+
+        </tbody>
+
+
+      </table>
+    </div>
+
+    <div class="col-4">
+      <div class="card">
+        <div class="card-header text-center">
+          <div class="card-title">
+            <h2>Total  {{ total | currency}}</h2> 
+          </div>
+        </div>
+        <div class="card-body">
+            <div class="text-center">
+              <strong>
+                Total de productos {{1}}
+              </strong>
+            </div>
+            <div class="text-center">
+              <strong>
+                {{ total | currency}}
+              </strong>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <app-generar-cita></app-generar-cita>
+  
