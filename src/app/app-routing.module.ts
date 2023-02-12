@@ -1,3 +1,4 @@
+import { CoreModule } from './core/core.module';
 import {  NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path: 'productos',
     loadChildren: () => import('./home/productos/productos.module').then(p=> p.ProductosModule)
+  },
+  {
+    path: 'cortes',
+    loadChildren: () => import('./home/cortes/cortes.module').then(p=> p.CortesModule)
   },
   {
     path: '**', component: PaginaNoDisponibleComponent
