@@ -51,3 +51,7 @@ export * from './ISuper.mode';
 export * from './ITamanioProducto';
 
 export * from './ITipoCorte';
+
+export * from './IBase64';
+
+export * from './IUpload';

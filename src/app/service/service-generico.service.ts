@@ -1,8 +1,10 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { catchError, retry } from 'rxjs/operators';
 import { IProducto } from '../home/productos/models';
+import { IImagen, IUploadImages } from '../models';
 
 
 
@@ -36,7 +38,8 @@ export abstract class ServiceGenericoService {
       );
   }
   getDataBy<R, D>(urlService: string, dato: D): Observable<R> {
-    const url = `${this.uri}/${urlService}/${dato}`
+    const url = `${this.uri}/${urlService}/${dato}`;
+    console.log(url)
     return this.http.get<R>(url,this.httpOptions)
       .pipe(
         retry(2),
@@ -53,6 +56,28 @@ export abstract class ServiceGenericoService {
       );
   }
 
+
+  getDataByPersonalizado(urlService: string, dato: number): Observable<IUploadImages> {
+    const url = `${this.uri}/${urlService}/${dato}`;
+    return this.http.get<IUploadImages>(url,this.httpOptions)
+      .pipe(
+        map(this.getDatMap),
+        retry(2),
+        catchError(this.handleError)
+      );
+  }
+  private getDatMap(datos: IUploadImages): IUploadImages{
+  const imgs: Array<IImagen> = datos.imagenes.map(m=>{
+    const imf = {
+      nombreImagen: m.nombreImagen,
+      extencionImagen: m.extencionImagen,
+      base64Imagen: `data:image/${m.extencionImagen};base64,${m.base64Imagen}`
+    }
+    return imf;
+  });
+  datos.imagenes = imgs;
+  return datos;
+  }
   protected handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
       // A client-side or network error occurred. Handle it accordingly.

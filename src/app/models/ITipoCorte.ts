@@ -10,5 +10,4 @@ export interface ITipoCorte extends ISuper{
 
 	nombreCorte: string;  
 	precioTipoCorte: number;
-    cita: ICita;
 }

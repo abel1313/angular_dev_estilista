@@ -8,6 +8,7 @@ import { MostrarComponent } from './mostrar/mostrar.component';
 import { UpdateComponent } from './update/update.component';
 import { DeleteComponent } from './delete/delete.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { CoreModule } from 'src/app/core/core.module';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     CommonModule,
     CortesRoutingModule,
     SharedModule,
+    CoreModule,
   ]
 })
 export class CortesModule { }

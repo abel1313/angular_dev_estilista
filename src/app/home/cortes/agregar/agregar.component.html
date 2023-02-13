@@ -1,1 +1,86 @@
-<p>agregar works!</p>
+<div class="row">
+    <div class="col-8">
+        <form [formGroup]="formGenerico" (ngSubmit)="guardarForm()" >
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title text-center">
+                        <legend>
+                            <h3>
+                                {{ nombreCard }}
+                            </h3>
+                        </legend>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row" formGroupName="tipoCorte">
+                        <div class="col-6">
+                            <div class="form-group" >
+                                <label for="nombre">Nombre del corte</label>
+                                <input type="text" class="form-control col-12" id="nombre" formControlName="nombreCorte" placeholder="Ingrese el nombre del corte">
+                                <div *ngIf="formGenerico.get('tipoCorte.nombreCorte')?.invalid && (formGenerico.get('tipoCorte.nombreCorte')?.dirty || formGenerico.get('tipoCorte.nombreCorte')?.touched)"
+                                class="alert alert-danger">
+                
+                                <div *ngIf="formGenerico.get('tipoCorte.nombreCorte')?.errors?.['required']">
+                                    El nombre del corte es requerida.
+                                </div>
+                                  </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group" >
+                                <label for="precio">Precio del corte</label>
+                                <input type="text" class="form-control col-12" id="precio" formControlName="precioTipoCorte" placeholder="Ingrese el precio del corte">
+                                <div *ngIf="formGenerico.get('tipoCorte.precioTipoCorte')?.invalid && (formGenerico.get('tipoCorte.precioTipoCorte')?.dirty || formGenerico.get('tipoCorte.precioTipoCorte')?.touched)"
+                                class="alert alert-danger">
+                
+                                <div *ngIf="formGenerico.get('tipoCorte.precioTipoCorte')?.errors?.['required']">
+                                    La hora es requerida.
+                                </div>
+                                  </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row" formGroupName="imagenes">
+                        <div class="col-12">
+
+                                <input type="file" name="corteImg" id="img" (change)="saveFile($event)">
+                                <div *ngIf="formGenerico.get('imagenes.nombreImagen')?.invalid && (formGenerico.get('imagenes.nombreImagen')?.dirty || formGenerico.get('imagenes.nombreImagen')?.touched)"
+                                class="alert alert-danger">
+                
+                                <div *ngIf="formGenerico.get('imagenes.nombreImagen')?.errors?.['required']">
+                                    El nombre del corte es requerida.
+                                </div>
+                                  </div>
+
+                                  <div *ngIf="!files.length" class="col-12 rmpm dropzone" appDrag (files)="filesDropped($event)">
+                                    <div class="text-wrapper">
+                                        <div class="centered">Drop your file here!</div>
+                                    </div>
+                                </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button type="submit">
+                        add
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-4">
+        <img *ngIf="imagenCote"  [src]="imagenCote" alt="" class="img-fluid">
+    </div>
+</div>
+
+
+<!--droped image preview-->
+<div *ngFor="let file of files">
+  <img *ngIf="file" [src]="file.url" class="img-fluid">
+</div>
+
+<button type="button" (click)="upload()">Upload Image</button>
