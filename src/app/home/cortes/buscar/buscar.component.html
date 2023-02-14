@@ -53,30 +53,33 @@
 </div>
 
 
-<div class="row">
-  <div class="col-12">
-    <div class="text-center">
-     <h3>
-      Corte {{ listaOtros.tipoCorte.nombreCorte}} Precio {{ listaOtros.tipoCorte.precioTipoCorte | currency }}
-     </h3>
+<div class="row" *ngIf="listaOtros.datos!">
+  <div class="col-12" style="border: 1px solid red;" *ngFor="let item of listaOtros.datos">
+    <div class="row" >
+      <div class="col-12">
+        <h3 class="text-center">
+          Corte  {{ item.tipoCorte.nombreCorte}} Precio {{ item.tipoCorte.precioTipoCorte | currency }}
+        </h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-4" *ngFor="let imagen of item.imagenes" >
+      <div class="card">
+        <div class="card-body">
+            <div class="row">
+              <div class="col-12" >
+                <img [src]="imagen.base64Imagen" alt="" class="img-fluid" >
+              </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <button class="btn btn-success">add</button>
+        </div>
+</div>
     </div>
   </div>
 </div>
-
-<div class="row" *ngIf="listaOtros!" >
-  <div class="col-4" *ngFor="let item of listaOtros.imagenes" >
-      <div class="card">
-              <div class="card-body">
-                  <div class="row">
-                    <div class="col-12">
-                      <img [src]="item.base64Imagen" alt="" class="img-fluid">
-                    </div>
-                  </div>
-              </div>
-              <div class="card-footer">
-                  <button class="btn btn-success">add</button>
-              </div>
-      </div>
-  </div>
 </div>
+
+
 

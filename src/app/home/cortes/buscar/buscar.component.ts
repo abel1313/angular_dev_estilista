@@ -1,4 +1,4 @@
-import { IResponseGeneric } from 'src/app/dto/IResponseGeneric';
+import { IResponseGeneric, ResponseGeneric } from 'src/app/dto/IResponseGeneric';
 import { ServiceGenericoService } from 'src/app/service/service-generico.service';
 import { ICorte } from './../../../models/ICorte';
 import { Component, OnInit, ViewChild, NgZone } from '@angular/core';
@@ -6,6 +6,7 @@ import { DataTableDirective } from 'angular-datatables';
 import { Subject, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { IUploadImages } from 'src/app/models';
+import { CortesService } from 'src/app/service/cortes.service';
 
 @Component({
   selector: 'app-buscar',
@@ -21,11 +22,17 @@ export class BuscarComponent implements OnInit {
   subscription: Subscription;
   listaCortes: Array<ICorte> = [] ;
 
-  listaOtros: IUploadImages ;
+  listaOtros: ResponseGeneric<Array<IUploadImages>> = {
+    code: '',
+    codeValue: 404,
+    mensaje:'',
+    datos:[]
+  };
+
   constructor(
     private readonly ngZone: NgZone,
     private readonly router: Router,
-    private readonly service: ServiceGenericoService
+    private readonly service: CortesService
   ) {
     this.subscription = new Subscription();
    }
@@ -47,10 +54,13 @@ export class BuscarComponent implements OnInit {
 
   private getCortesById(): void{
     const id = 4;
+    const page = 0;
+    const size = 4;
+    const urlConcat = `${page}/${size}`;
     this.subscription.add(
-      this.service.getDataByPersonalizado(`carga-documentos/getData`,id).subscribe((sucess: any)=>{
+      this.service.getAllCortes(`cortes/getAllPage`,urlConcat).subscribe((sucess: ResponseGeneric<Array<IUploadImages>>)=>{
         
-        console.log(sucess);
+        console.log(sucess,' by ');
         this.listaOtros = sucess;
       }, (error: any)=>console.log)
     );
