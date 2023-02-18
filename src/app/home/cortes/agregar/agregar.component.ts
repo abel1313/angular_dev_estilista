@@ -9,6 +9,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import Swal from 'sweetalert2';
 import { FileHandle } from 'src/app/core/dragDrop.directive';
 import { ValidatorImages } from 'src/app/validators';
+import { IResponseGeneric } from 'src/app/dto/IResponseGeneric';
 
 
 @Component({
@@ -54,15 +55,44 @@ uploadImages: IUploadImages;
   );
   }
 
+  onlyNumbers(oby: string ){
+    console.log(oby)
+    this.formGenerico.get('tipoCorte.precioTipoCorte')?.setValue(oby.replace(/\D/g, ''));
 
+  }
   guardarForm(): void{
-    console.log(this.formGenerico.value);
-
+    console.log(this.uploadImages);
+    this.uploadImages.tipoCorte.nombreCorte = this.formGenerico.get('tipoCorte.nombreCorte')?.value;
+    this.uploadImages.tipoCorte.precioTipoCorte = this.formGenerico.get('tipoCorte.precioTipoCorte')?.value;
     this.subscription.add(
-      this.service.postData<IUploadImages, any>(this.uploadImages,'carga-documentos/uploadDocuments').subscribe((success: any)=>{
+      this.service.postData<IUploadImages, IResponseGeneric<Boolean>>(this.uploadImages,'cortes/saveCorte').subscribe((success: IResponseGeneric<Boolean>)=>{
         console.log(success);
-      },(error: any)=>{
-        console.log(error)
+        if(success.codeValue === 200 && success.datos){
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: success.mensaje,
+            showConfirmButton: false
+          });
+          this.files = [];
+          this.formGenerico.reset();
+          this.uploadImages = UploadImages.initUploadImages();
+        }else{
+          Swal.fire({
+            position: 'top-end',
+            icon: 'info',
+            title: success.mensaje,
+            showConfirmButton: false
+          });
+        }
+      },(error: IResponseGeneric<Boolean>)=>{
+        console.log(error, 'ro rrrrrrrrrrrrrrrrrrrrr ' )
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          title: error.mensaje,
+          showConfirmButton: false
+        });
       })
     );
   }

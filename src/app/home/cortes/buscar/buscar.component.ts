@@ -55,7 +55,7 @@ export class BuscarComponent implements OnInit {
   private getCortesById(): void{
     const id = 4;
     const page = 0;
-    const size = 4;
+    const size = 6;
     const urlConcat = `${page}/${size}`;
     this.subscription.add(
       this.service.getAllCortes(`cortes/getAllPage`,urlConcat).subscribe((sucess: ResponseGeneric<Array<IUploadImages>>)=>{

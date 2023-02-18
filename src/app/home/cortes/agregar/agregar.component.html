@@ -29,7 +29,7 @@
                         <div class="col-6">
                             <div class="form-group" >
                                 <label for="precio">Precio del corte</label>
-                                <input type="text" class="form-control col-12" id="precio" formControlName="precioTipoCorte" placeholder="Ingrese el precio del corte">
+                                <input type="text" class="form-control col-12" id="precio" formControlName="precioTipoCorte" placeholder="Ingrese el precio del corte" #only (keyup)="onlyNumbers(only.value)">
                                 <div *ngIf="formGenerico.get('tipoCorte.precioTipoCorte')?.invalid && (formGenerico.get('tipoCorte.precioTipoCorte')?.dirty || formGenerico.get('tipoCorte.precioTipoCorte')?.touched)"
                                 class="alert alert-danger">
                 
