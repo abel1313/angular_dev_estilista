@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { IResponseGeneric } from 'src/app/dto/IResponseGeneric';
 import { ICarrito } from 'src/app/home/carrito/models';
 import { IProducto } from 'src/app/home/productos/models';
 
@@ -15,6 +16,7 @@ export class HeaderComponent implements OnInit, OnDestroy{
   subscription: Subscription;
   cantidad = 0;
   listaProductos: Array<IProducto>;
+  listaHeader: IResponseGeneric<Array<any>>;
 
   constructor(private readonly service: ServiceGenericoService) {
 
@@ -22,6 +24,22 @@ export class HeaderComponent implements OnInit, OnDestroy{
     this.listaProductos = [];
    }
   ngOnInit(): void {
+
+    this.subscription.add(
+      this.service.getData<IResponseGeneric<Array<any>>>('rutas').subscribe((success: IResponseGeneric<Array<any>> )=>{
+        this.listaHeader = success;
+
+        success.datos.forEach(f=>{
+          f.lista.forEach((res: any)=>{
+            console.log(res);
+            console.log(res.rutaComponente.nombreComponente+'/'+res.rutaAccion.nombreAccion);
+          });
+          
+        });
+      },(err)=>{
+        console.log(err);
+      })
+    );
 
     this.obtenerCantidad();
     this.disminuirCantidad();
