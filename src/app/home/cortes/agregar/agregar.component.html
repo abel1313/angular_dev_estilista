@@ -42,45 +42,47 @@
 
                     </div>
 
-                    <div class="row" formGroupName="imagenes">
+                    <div class="row">
                         <div class="col-12">
-
-                                <input type="file" name="corteImg" id="img" (change)="saveFile($event)">
-                                <div *ngIf="formGenerico.get('imagenes.nombreImagen')?.invalid && (formGenerico.get('imagenes.nombreImagen')?.dirty || formGenerico.get('imagenes.nombreImagen')?.touched)"
-                                class="alert alert-danger">
-                
-                                <div *ngIf="formGenerico.get('imagenes.nombreImagen')?.errors?.['required']">
-                                    El nombre del corte es requerida.
-                                </div>
-                                  </div>
 
                                   <div *ngIf="!files.length" class="col-12 rmpm dropzone" appDrag (files)="filesDropped($event)">
                                     <div class="text-wrapper">
-                                        <div class="centered">Drop your file here!</div>
+                                        <div class="centered">Arrastra tus Imagenes aqui</div>
                                     </div>
                                 </div>
 
                         </div>
                     </div>
                 </div>
-                <div class="card-footer">
-                    <button type="submit">
-                        add
-                    </button>
+                <div class="card-footer  ">
+                    <div class="row ">
+                        <div class="col-6">
+                            <button class="btn btn-info " type="button" (click)="limpiarImagenes();" >
+                                Limpiar imagen
+                            </button>
+                        </div>
+                        <div class="col-6 d-flex justify-content-end">
+                            <button type="submit" 
+                            [ngClass]="nombreButton == 'Registrar corte' ? 'btn btn-success' : 'btn btn-warning' "  [disabled]="formGenerico.invalid">
+                                {{ nombreButton }}
+                            </button>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </form>
     </div>
 
-    <div class="col-4">
-        <img *ngIf="imagenCote"  [src]="imagenCote" alt="" class="img-fluid">
-    </div>
+ 
 </div>
 
+<div class="row">
+    <div class="col-4" *ngFor="let file of files">
+        <img *ngIf="file" [src]="file.url" class="img-fluid">
+      </div>
+</div>
 
 <!--droped image preview-->
-<div *ngFor="let file of files">
-  <img *ngIf="file" [src]="file.url" class="img-fluid">
-</div>
 
-<button type="button" (click)="upload()">Upload Image</button>
+

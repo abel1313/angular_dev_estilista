@@ -1,3 +1,4 @@
+
 import { ServiceGenericoService } from 'src/app/service/service-generico.service';
 import { Subscription } from 'rxjs';
 import { IImagen, IUpload, IUploadImages, UploadImages } from './../../../models/IUpload';
@@ -7,6 +8,7 @@ import { Base64 } from 'src/app/models';
 import { DomSanitizer } from '@angular/platform-browser';
 import Swal from 'sweetalert2';
 import { FileHandle } from 'src/app/core/dragDrop.directive';
+import { ValidatorImages } from 'src/app/validators';
 
 
 @Component({
@@ -17,6 +19,7 @@ import { FileHandle } from 'src/app/core/dragDrop.directive';
 export class AgregarComponent implements OnInit {
 
   @Input() nombreCard: string = 'Agregar corte';
+  @Input() nombreButton: string = 'Registrar corte';
   imagenCote: any;
   formGenerico: FormGroup;
 
@@ -45,16 +48,10 @@ uploadImages: IUploadImages;
           id: [''],
           nombreCorte: ['', [Validators.required]],
           precioTipoCorte: ['', [Validators.required]]
-        }),
-        imagenes: this.fb.group({
-          id: [''],
-          nombreImagen: ['', [Validators.required]],
-          extencionImagen: ['', [Validators.required]],
-          base64Imagen:['', [Validators.required]]
         })
 
-      }
-    );
+      },{validators: ValidatorImages.validLengthImages(0) }
+  );
   }
 
 
@@ -126,9 +123,20 @@ uploadImages: IUploadImages;
     }); 
     console.log(imagenes);
     this.uploadImages.imagenes = imagenes;
+
+    this.formGenerico.setValidators(ValidatorImages.validLengthImages(this.uploadImages.imagenes.length));
+    this.formGenerico.updateValueAndValidity();
+    this.formGenerico.clearAsyncValidators();
   }
-  upload(): void{
-    console.log(' ********************************************************************** ');
-    console.log(this.uploadImages);
+
+  limpiarImagenes(): void{
+    if( this.files.length > 0 ){
+      this.files = [];
+      this.formGenerico.setValidators(ValidatorImages.validLengthImages(this.files.length));
+      this.formGenerico.updateValueAndValidity();
+      this.formGenerico.clearAsyncValidators();
+  
+    }
   }
+
 }
