@@ -1,8 +1,10 @@
+import { IUploadImages, IUploadImagesProductos } from './../../../models/IUpload';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { UrlServer } from 'src/app/models/enum.model';
 import { ServiceGenericoService } from 'src/app/service/service-generico.service';
 import { IProducto } from '../models';
+import { ProductosService } from '../productos.service';
 
 
 @Component({
@@ -18,7 +20,7 @@ export class BuscarComponent implements OnInit, OnDestroy {
   iProducto: Array<IProducto> = [];
 
   constructor(
-    private readonly service: ServiceGenericoService
+    private readonly service: ProductosService
   ) { 
     this.subscription = new Subscription();
   }
@@ -26,7 +28,9 @@ export class BuscarComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    this.obtenerDatos();
+    
+
+    this.searchProductosBy();
   }
 
   buscarPor( buscar: string): void{
@@ -34,7 +38,8 @@ export class BuscarComponent implements OnInit, OnDestroy {
     if( buscar !== ''){
       this.obtenerDatosContains(buscar);
     }else{
-      this.obtenerDatos();
+      
+      
     }
   }
 
@@ -49,16 +54,40 @@ export class BuscarComponent implements OnInit, OnDestroy {
     );
   }
 
-  private obtenerDatos(){
+  private searchProductosBy(){
+
+    const producto : IUploadImagesProductos = {
+      imagenes:[
+        {
+          nombreImagen:'',
+          base64Imagen: '',
+          extencionImagen:''
+        }
+      ],
+      producto:{
+        estatusPieza: {
+          activo:0
+        },
+        nombreProducto:'',
+        tipoPieza:{
+          precio:0,
+          tipoPieza:''
+        }
+      },
+      page: 0,
+      size:5
+    };
+    const page = 0;
+    const size = 9;
     this.subscription.add(
-      this.service.getData<any>(UrlServer.OBTENER_DATOS_PRODUCTOS).subscribe((res)=>{
-        this.iProducto = res.datos;
-        console.log(this.iProducto)
+      this.service.getPaginations<any>('productos/searchProducts',page,size).subscribe((res: any)=>{
+console.log(res)
       },(err)=>{
         console.log(err, " errprrrrrrrr ")
       })
     );
   }
+
 
 
 

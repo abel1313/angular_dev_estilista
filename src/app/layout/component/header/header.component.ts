@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit, OnDestroy{
   subscription: Subscription;
   cantidad = 0;
   listaProductos: Array<IProducto>;
-  listaHeader: IResponseGeneric<Array<any>>;
+  listaHeader: any;
 
   constructor(private readonly service: ServiceGenericoService) {
 
@@ -26,11 +26,12 @@ export class HeaderComponent implements OnInit, OnDestroy{
   ngOnInit(): void {
 
     this.subscription.add(
-      this.service.getData<IResponseGeneric<Array<any>>>('rutas').subscribe((success: IResponseGeneric<Array<any>> )=>{
+      this.service.getData<IResponseGeneric<Array<any>>>('rutas/getData').subscribe((success: any )=>{
+        console.log(success)
         this.listaHeader = success;
 
-        success.datos.forEach(f=>{
-          f.lista.forEach((res: any)=>{
+        success.t.forEach((fa: any)=>{
+          fa.lista.forEach((res: any)=>{
             console.log(res);
             console.log(res.rutaComponente.nombreComponente+'/'+res.rutaAccion.nombreAccion);
           });

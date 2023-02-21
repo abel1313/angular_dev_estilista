@@ -94,6 +94,19 @@
                         </div>
 
 
+                        <div class="row">
+                            <div class="col-12">
+    
+                                      <div *ngIf="!files.length" class="col-12 rmpm dropzone" appDrag (files)="filesDropped($event)">
+                                        <div class="text-wrapper">
+                                            <div class="centered">Arrastra tus Imagenes aqui</div>
+                                        </div>
+                                    </div>
+    
+                            </div>
+                        </div>
+
+
                 </div>
                 <div class="card-footer">
 

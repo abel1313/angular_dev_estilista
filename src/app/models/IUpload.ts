@@ -1,5 +1,6 @@
 import { ITipoCorte } from './ITipoCorte';
 import { ISuper } from './ISuper.mode';
+import { IProducto } from './IProducto';
 
 
 
@@ -15,6 +16,18 @@ export interface IUploadImages extends ISuper{
     imagenes: IImagen [];
 }
 
+export interface IUploadImagesProductos extends ISuper{
+    producto: IProducto;
+    imagenes: IImagen [];
+    page:number;
+    size:number;
+}
+
+export interface IUploadSaveImagesProductos extends ISuper{
+    producto: IProducto;
+    list: IImagen []
+}
+
 export class UploadImages{
 
     static initUploadImages(): IUploadImages{
@@ -26,7 +39,15 @@ export class UploadImages{
             }
         }
     }
+}
 
+
+export class UploadImagesProducto{
+
+    static initUploadImagesSave(): IImagen[]{
+        return [];
+
+}
 }
 
 

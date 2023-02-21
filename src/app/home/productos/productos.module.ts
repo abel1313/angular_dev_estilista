@@ -9,6 +9,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { CitasModule } from '../citas/citas.module';
 import { ComponentComponent } from './component/component.component';
 import { UpdateComponent } from './update/update.component';
+import { CoreModule } from 'src/app/core/core.module';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { UpdateComponent } from './update/update.component';
     CommonModule,
     ProductosRoutingModule,
     SharedModule,
-    CitasModule
+    CitasModule,
+    CoreModule
   ]
 })
 export class ProductosModule { }

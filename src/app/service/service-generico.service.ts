@@ -47,6 +47,15 @@ export abstract class ServiceGenericoService {
       );
   }
 
+  getPaginations<R>(urlService: string, page: number, size: number): Observable<R> {
+    const url = `${this.uri}/${urlService}/${page}/${size}`;
+    console.log(url)
+    return this.http.get<R>(url,this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      );
+  }
   postData<T,R>(t: T, urlService: string): Observable<R> {
     const url = `${this.uri}/${urlService}`
     return this.http.post<R>(url, t, this.httpOptions)
