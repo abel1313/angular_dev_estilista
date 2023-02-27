@@ -35,11 +35,9 @@ export class ComponentComponent implements OnInit {
    }
 
   private getFormProducto(): void{
-    console.log(this.producto,' fuera de ');
     if( !this.producto!){
       this.producto = Producto.iniciarProducto();
     }
-    console.log(this.producto,' fuera de ');
   }
   ngOnInit(): void {
 this.getFormProducto();
@@ -71,13 +69,10 @@ this.getFormProducto();
   }
 actualizar(): void{
   let productoExample = this.getInitProducto();
-  console.log(productoExample, ' iniciando ');
   const valor = this.formAddProducto.get('estatusPieza.activo')?.value ? 1: 0 ;
   const productoGuardar = this.formAddProducto?.value;
   productoExample = this.formAddProducto?.value;
-  console.log(productoExample, ' mas que eso ');
   productoExample.estatusPieza.activo = valor;
-  console.log(productoExample, ' mas que eso ');
   const estatus: Estatus = productoGuardar.estatus;
 
   const producto: IUploadSaveImagesProductos = {
@@ -85,13 +80,13 @@ actualizar(): void{
     list: this.uploadImages
   }
 
-    console.log(producto);
+  producto.producto.estatusPieza.id = producto.producto.estatusPieza.activo == 1 ? 1 : 2;
+
 
     this.subscription.add(this.service.postData(producto,'productos/saveProductoImage').subscribe((succ)=>{
-      console.log(succ)
     },(error: any)=>{
 
-      console.log(error)
+      console.error(error)
     }));
 
   }
@@ -114,7 +109,6 @@ actualizar(): void{
       });
       return img;
     }); 
-    console.log(imagenes);
     this.uploadImages = imagenes;
 
     this.formAddProducto.setValidators(ValidatorImages.validLengthImages(this.uploadImages.length));
@@ -125,7 +119,7 @@ actualizar(): void{
     if( file!){
       return await Base64.base64(file);
     }else{
-      console.log(' imagen no valid')
+      console.error(' imagen no valid')
     } 
   }
   getInitProducto(): IProd{

@@ -20,6 +20,5 @@ export class GenerarCitaComponent implements OnInit {
 
   combo(pedido: IAutocomplete): void{
     this.completeAuto = pedido;
-console.log(' pedido ', pedido)
   }
 }

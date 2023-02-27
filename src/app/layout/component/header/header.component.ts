@@ -27,16 +27,16 @@ export class HeaderComponent implements OnInit, OnDestroy{
 
     this.subscription.add(
       this.service.getData<IResponseGeneric<Array<any>>>('rutas/getData').subscribe((success: any )=>{
-        console.log(success)
+        // console.log(success)
         this.listaHeader = success;
 
-        success.t.forEach((fa: any)=>{
-          fa.lista.forEach((res: any)=>{
-            console.log(res);
-            console.log(res.rutaComponente.nombreComponente+'/'+res.rutaAccion.nombreAccion);
-          });
+        // success.t.forEach((fa: any)=>{
+        //   fa.lista.forEach((res: any)=>{
+        //     console.log(res);
+        //     console.log(res.rutaComponente.nombreComponente+'/'+res.rutaAccion.nombreAccion);
+        //   });
           
-        });
+        // });
       },(err)=>{
         console.log(err);
       })
@@ -57,7 +57,7 @@ export class HeaderComponent implements OnInit, OnDestroy{
     
 
     
-    console.log( carrito, ' Sesiones por aca ');
+    // console.log( carrito, ' Sesiones por aca ');
 
     sessionStorage.setItem('producto', JSON.stringify(this.listaProductos));
   }

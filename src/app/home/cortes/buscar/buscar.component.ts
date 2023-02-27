@@ -47,7 +47,6 @@ export class BuscarComponent implements OnInit {
     this.subscription.add(
       this.service.getData<IResponseGeneric<Array<ICorte>>>('cortes').subscribe((sucess: IResponseGeneric<Array<ICorte>>)=>{
         this.listaCortes = sucess.datos;
-        console.log(sucess)
       }, (error: any)=>console.log)
     );
   }
@@ -60,9 +59,8 @@ export class BuscarComponent implements OnInit {
     this.subscription.add(
       this.service.getAllCortes(`cortes/getAllPage`,urlConcat).subscribe((sucess: ResponseGeneric<Array<IUploadImages>>)=>{
         
-        console.log(sucess,' by ');
         this.listaOtros = sucess;
-      }, (error: any)=>console.log)
+      }, (error: any)=>console.error)
     );
   }
 

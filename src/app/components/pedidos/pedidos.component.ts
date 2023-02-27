@@ -36,7 +36,7 @@ export class PedidosComponent implements OnInit {
   selectEvent(item: any) {
     // do something with selected item
 
-    console.log(item);
+
     this.respuestaCombo.emit(item);
   }
 

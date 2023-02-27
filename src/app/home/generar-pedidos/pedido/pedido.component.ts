@@ -58,7 +58,6 @@ export class PedidoComponent implements OnInit {
 
 
   guardarPedido(): void {
-    console.log(this.formPedido)
   }
 
 
@@ -72,11 +71,9 @@ export class PedidoComponent implements OnInit {
   selectEvent(item: any) {
     // do something with selected item
 
-    console.log(item);
 
   }
   clearInput(event: any): void {
-    console.log(event)
   }
 
   onInput(event: any) {
@@ -85,7 +82,6 @@ export class PedidoComponent implements OnInit {
     const valorBusqueda = this.data.find(f => f.name.toUpperCase() == value.toUpperCase());
     if (valorBusqueda!) {
 
-      console.log(valorBusqueda, ' value ');
 
     } else {
 
@@ -98,9 +94,6 @@ export class PedidoComponent implements OnInit {
 
     }
     const datos = this.formPedido.errors?.['clienteNoExiste'];
-
-    console.log(' pedido ', this.formPedido)
-    console.log(' pedido ', datos)
 
 
   }

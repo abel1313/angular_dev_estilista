@@ -56,12 +56,10 @@ uploadImages: IUploadImages;
   }
 
   onlyNumbers(oby: string ){
-    console.log(oby)
     this.formGenerico.get('tipoCorte.precioTipoCorte')?.setValue(oby.replace(/\D/g, ''));
 
   }
   guardarForm(): void{
-    console.log(this.uploadImages);
     this.uploadImages.tipoCorte.nombreCorte = this.formGenerico.get('tipoCorte.nombreCorte')?.value;
     this.uploadImages.tipoCorte.precioTipoCorte = this.formGenerico.get('tipoCorte.precioTipoCorte')?.value;
     this.subscription.add(
@@ -86,7 +84,7 @@ uploadImages: IUploadImages;
           });
         }
       },(error: IResponseGeneric<Boolean>)=>{
-        console.log(error, 'ro rrrrrrrrrrrrrrrrrrrrr ' )
+        console.error(error, 'ro rrrrrrrrrrrrrrrrrrrrr ' )
         Swal.fire({
           position: 'top-end',
           icon: 'error',
@@ -101,7 +99,7 @@ uploadImages: IUploadImages;
     if( file!){
       return await Base64.base64(file);
     }else{
-      console.log(' imagen no valid')
+      console.error(' imagen no valid')
     } 
   }
 
@@ -127,8 +125,6 @@ uploadImages: IUploadImages;
         this.formGenerico.get('imagenes.extencionImagen')?.setValue(ext);
         this.formGenerico.get('imagenes.base64Imagen')?.setValue(base64Img);
   
-        console.log(this.formGenerico.value)
-  
         this.imagenCote = this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/${ext};base64,${base64Img}`);
   
     }
@@ -151,7 +147,6 @@ uploadImages: IUploadImages;
       });
       return img;
     }); 
-    console.log(imagenes);
     this.uploadImages.imagenes = imagenes;
 
     this.formGenerico.setValidators(ValidatorImages.validLengthImages(this.uploadImages.imagenes.length));

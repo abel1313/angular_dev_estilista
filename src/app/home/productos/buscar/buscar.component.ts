@@ -5,6 +5,7 @@ import { UrlServer } from 'src/app/models/enum.model';
 import { ServiceGenericoService } from 'src/app/service/service-generico.service';
 import { IProducto } from '../models';
 import { ProductosService } from '../productos.service';
+import { IProductoDto, Producto } from '../models/IProducto.model';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class BuscarComponent implements OnInit, OnDestroy {
   subscription: Subscription;
 
   iProducto: Array<IProducto> = [];
-
+  listaProductosDto: Array<IProductoDto> = [];
   constructor(
     private readonly service: ProductosService
   ) { 
@@ -34,7 +35,6 @@ export class BuscarComponent implements OnInit, OnDestroy {
   }
 
   buscarPor( buscar: string): void{
-    console.log( buscar);
     if( buscar !== ''){
       this.obtenerDatosContains(buscar);
     }else{
@@ -47,9 +47,8 @@ export class BuscarComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.service.getDataBy<Array<IProducto>, string>(UrlServer.OBTENER_DATOS_PRODUCTOS_BY, buscar).subscribe((res)=>{
        this.iProducto = res;
-        console.log(this.iProducto)
       },(err)=>{
-        console.log(err, " errprrrrrrrr ")
+        console.error(err, " errprrrrrrrr ")
       })
     );
   }
@@ -81,9 +80,9 @@ export class BuscarComponent implements OnInit, OnDestroy {
     const size = 9;
     this.subscription.add(
       this.service.getPaginations<any>('productos/searchProducts',page,size).subscribe((res: any)=>{
-console.log(res)
+        this.listaProductosDto = this.service.paginationImages(res.datos);
       },(err)=>{
-        console.log(err, " errprrrrrrrr ")
+        console.error(err, " errprrrrrrrr ")
       })
     );
   }

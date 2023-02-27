@@ -1,1 +1,31 @@
-<app-component *ngIf="producto!"  [tituloComponente]="tituloAgregar" [tituloBtn]="tituloBoton" [producto]="producto" ></app-component>
+
+<div class="row">
+    <div class="col-12">
+        <div class="form-group">
+            <label for="buscarProducto">Buscar producto</label>
+            <input type="text" class="form-control" id="buscarProducto" placeholder="Ingrese el producto">
+        </div>
+    </div>
+</div>
+
+<div class="row" *ngIf="listaProductosDto">
+    <div class="col-12" style="background-color: blanchedalmond;"  *ngFor="let item of listaProductosDto" >
+        <div class="row">
+            <div class="col-12">
+               <h3 class="text-center" *ngIf="item.producto" >
+                {{item.producto.nombreProducto}}
+               </h3>
+            </div>
+        </div>
+        <div class="row" >
+            <div class="col-4 mt-3"  *ngFor="let ite of item.imagenes">
+                    <img [src]="ite.base64Imagen" class="img-responsive" alt="">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 d-flex justify-content-center" *ngIf="item.producto" >
+                <button class="btn btn-warning col-4" [routerLink]="['../actualizar', item.producto.id]">Editar</button>
+            </div>
+        </div>
+    </div>
+</div>

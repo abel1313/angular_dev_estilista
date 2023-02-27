@@ -12,4 +12,4 @@
     </div>
 </div>
 
-<app-mostrar [listaProductos]="iProducto"></app-mostrar>
+<app-mostrar *ngIf="listaProductosDto.length > 0"  [listaProductosDto]="listaProductosDto"></app-mostrar>

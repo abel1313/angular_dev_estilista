@@ -44,11 +44,9 @@ export class ComboClienteComponent implements OnInit, ControlValueAccessor  {
   selectEvent(item: any) {
     // do something with selected item
 
-    console.log(item);
     this.respuestaCombo.emit(item);
   }
   clearInput(event: any): void{
-console.log(event)
   }
 
   onInput(event: any ) {
@@ -57,7 +55,6 @@ console.log(event)
     const valorBusqueda =  this.data.find(f=> f.name.toUpperCase() == this.value.toUpperCase() );
     if(valorBusqueda!){
 
-      console.log(valorBusqueda, ' value ');
       this.onTouch();
       this.onChange(this.value);
     }else{

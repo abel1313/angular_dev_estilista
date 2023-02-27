@@ -10,6 +10,7 @@ import { CitasModule } from '../citas/citas.module';
 import { ComponentComponent } from './component/component.component';
 import { UpdateComponent } from './update/update.component';
 import { CoreModule } from 'src/app/core/core.module';
+import { UpdateProductoComponent } from './update-producto/update-producto.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { CoreModule } from 'src/app/core/core.module';
     BuscarComponent,
     MostrarComponent,
     ComponentComponent,
-    UpdateComponent
+    UpdateComponent,
+    UpdateProductoComponent
   ],
   imports: [
     CommonModule,

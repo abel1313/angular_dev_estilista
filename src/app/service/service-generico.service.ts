@@ -5,6 +5,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { catchError, retry } from 'rxjs/operators';
 import { IProducto } from '../home/productos/models';
 import { IImagen, IUploadImages } from '../models';
+import { IProductoDto } from '../home/productos/models/IProducto.model';
 
 
 
@@ -56,6 +57,26 @@ export abstract class ServiceGenericoService {
         catchError(this.handleError)
       );
   }
+  public paginationImages(datos: Array<IProductoDto>): Array<IProductoDto>{
+   
+    const imgs: Array<IProductoDto> = datos.map(m=>{
+      let prod: IProductoDto = m;
+      const listImages: Array<IImagen> = m.imagenes.map(mapp=>{
+        const imf = {
+          nombreImagen: mapp.nombreImagen,
+          extencionImagen: mapp.extencionImagen,
+          base64Imagen: `data:image/${mapp.extencionImagen};base64,${mapp.base64Imagen}`
+        }
+
+        return imf;
+      });
+      prod.imagenes = listImages;
+      return prod;
+    });
+   
+    return imgs;
+    }
+
   postData<T,R>(t: T, urlService: string): Observable<R> {
     const url = `${this.uri}/${urlService}`
     return this.http.post<R>(url, t, this.httpOptions)

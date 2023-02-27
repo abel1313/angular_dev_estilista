@@ -28,7 +28,7 @@ export class InputsComponent implements OnInit, ControlValueAccessor {
 
   ngOnInit(): void {
 
-    console.log(this.arial)
+
   }
 
   onInput(event: any ) {
@@ -43,10 +43,8 @@ export class InputsComponent implements OnInit, ControlValueAccessor {
 
   writeValue(value: any): void {
     
-    console.log("write ", value)
 
     if (value) {
-      console.log("Se ejecuto ", value)
       this.value = value || '';
       this.counter = value.length;
     } else {
@@ -54,15 +52,12 @@ export class InputsComponent implements OnInit, ControlValueAccessor {
     }
   }
   registerOnChange(fn: any): void {
-    console.log(" Reguistra un ")
     this.onChange = fn;
   }
   registerOnTouched(fn: any): void {
-    console.log(" Reguistra ontouch ")
     this.onTouch = fn;
   }
   setDisabledState(isDisabled: boolean): void {
-    console.log(" set dissable ")
     this.isDisabled = isDisabled;
   }
 

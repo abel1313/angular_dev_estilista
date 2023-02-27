@@ -19,7 +19,6 @@ dato = 'Vamos';
   }
 
   diste(){
-    console.log(this.modelInput.target.value)
   }
 
 }
